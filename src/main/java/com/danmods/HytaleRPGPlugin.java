@@ -1,11 +1,13 @@
 package com.danmods;
 
+import com.danmods.commands.RPGCommandCollection;
 import com.danmods.components.PlayerRPGComponent;
 import com.danmods.events.GiveXPEvent;
 import com.danmods.events.LevelUpEvent;
 import com.danmods.handlers.GiveXPHandler;
 import com.danmods.handlers.LevelUpHandler;
 import com.danmods.systems.PlayerJoinSystem;
+import com.danmods.systems.XPGainSystem;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
@@ -18,9 +20,8 @@ public class HytaleRPGPlugin extends JavaPlugin {
     @Override
     protected void setup() {
         var storeRegistry = getEntityStoreRegistry();
-        var eventRegistry = getEventRegistry();
 
-        // Register PlayerRPG Component
+        // Component Registries
         var rpgType = storeRegistry.registerComponent(
                 PlayerRPGComponent.class,
                 "HytaleRPG_PlayerData",
@@ -28,12 +29,21 @@ public class HytaleRPGPlugin extends JavaPlugin {
         );
         PlayerRPGComponent.setComponentType(rpgType);
 
-        // Register Player Join System
+        // System Registries
         storeRegistry.registerSystem(new PlayerJoinSystem());
+        storeRegistry.registerSystem(new XPGainSystem());
 
-        //eventRegistry.register(GiveXPEvent.class, new GiveXPHandler());
-        //eventRegistry.register(LevelUpEvent.class, new LevelUpHandler());
+        // Event and Handler Registries
+        var eventRegistry = getEventRegistry();
+
+        eventRegistry.register(GiveXPEvent.class, new GiveXPHandler());
+        eventRegistry.register(LevelUpEvent.class, new LevelUpHandler());
+
+        // Command Registries
+        var commandRegistry = getCommandRegistry();
+
+        commandRegistry.registerCommand(new RPGCommandCollection());
+
 
     }
-
 }

@@ -14,7 +14,7 @@ public record LevelUpEvent (
         int newLevel
 )  implements IEvent<Void> {
 
-    public int levelsGained(int oldLevel, int newLevel)  {
+    public int levelsGained()  {
         return newLevel - oldLevel;
     }
     public static void dispatch(Ref<EntityStore> playerRef, int oldLevel, int newLevel) {

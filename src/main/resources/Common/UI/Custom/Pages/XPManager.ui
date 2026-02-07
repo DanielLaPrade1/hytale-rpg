@@ -1,0 +1,25 @@
+$C = "../Common.ui";
+
+Group {
+    Anchor: (Width: 400, Height: 200);
+    Background: #1a1a2e(0.95);
+    LayoutMode: Top;
+    Padding: (Full: 20);
+
+    Label #Title {
+        Text: "Tutorial Level 1";
+        Anchor: (Height: 40);
+        Style: (FontSize: 24, TextColor: #ffffff, Alignment: Center);
+    }
+
+    $C.@TextField #XPInput {
+        Anchor: (Height: 35);
+        PlaceholderText: "How Much XP";
+    }
+
+    TextButton #GreetButton {
+        Anchor: (Height: 35);
+        Text: "Greet Me!";
+    }
+}
+
