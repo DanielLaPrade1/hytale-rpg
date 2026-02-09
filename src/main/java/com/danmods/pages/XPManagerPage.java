@@ -20,54 +20,66 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
-public class XPManagerPage extends InteractiveCustomUIPage<XPManagerPage.Data> {
+//public class XPManagerPage extends InteractiveCustomUIPage<XPManagerPage.Data> {
+//
+//    public static class Data {
+//        public String value;
+//
+//        public static final BuilderCodec<Data> CODEC = BuilderCodec
+//                .builder(Data.class, Data::new)
+//                .append(new KeyedCodec<>(
+//                        "@XPInput", Codec.STRING),
+//                        (data, value) -> data.value = value,
+//                        data -> data.value)
+//                .add()
+//                .build();
+//    }
+//
+//    public XPManagerPage(@NonNullDecl PlayerRef playerRef) {
+//        super(playerRef, CustomPageLifetime.CanDismissOrCloseThroughInteraction,
+//                Data.CODEC);
+//    }
+//
+//    @Override
+//    public void build(
+//            @NonNullDecl Ref<EntityStore> ref,
+//            @NonNullDecl UICommandBuilder uiCommandBuilder,
+//            @NonNullDecl UIEventBuilder uiEventBuilder,
+//            @NonNullDecl Store<EntityStore> store
+//    ) {
+//        uiCommandBuilder.append("Pages/XPManager.ui");
+//
+//        uiEventBuilder.addEventBinding(
+//                CustomUIEventBindingType.Activating,
+//                "#GreetButton",
+//                new EventData().append("@XPInput", "#XPInput.Value")
+//        );
+//    }
+//
+//    @Override
+//    public void handleDataEvent(
+//            @NonNullDecl Ref<EntityStore> ref,
+//            @NonNullDecl Store<EntityStore> store,
+//            @NonNullDecl Data data
+//    ) {
+//        Player player = store.getComponent(ref, Player.getComponentType());
+//        if (player == null) return;
+//
+//        player.sendMessage(Message.raw("You added %s XP".formatted(data.value)));
+//
+//        // Must call to avoid infinite update
+//        sendUpdate();
+//    }
+//}
 
-    public static class Data {
-        public String value;
-
-        public static final BuilderCodec<Data> CODEC = BuilderCodec
-                .builder(Data.class, Data::new)
-                .append(new KeyedCodec<>(
-                        "@XPInput", Codec.STRING),
-                        (data, value) -> data.value = value,
-                        data -> data.value)
-                .add()
-                .build();
-    }
+public class XPManagerPage extends BasicCustomUIPage {
 
     public XPManagerPage(@NonNullDecl PlayerRef playerRef) {
-        super(playerRef, CustomPageLifetime.CanDismissOrCloseThroughInteraction,
-                Data.CODEC);
+        super(playerRef, CustomPageLifetime.CanDismissOrCloseThroughInteraction);
     }
 
     @Override
-    public void build(
-            @NonNullDecl Ref<EntityStore> ref,
-            @NonNullDecl UICommandBuilder uiCommandBuilder,
-            @NonNullDecl UIEventBuilder uiEventBuilder,
-            @NonNullDecl Store<EntityStore> store
-    ) {
+    public void build(@NonNullDecl UICommandBuilder uiCommandBuilder) {
         uiCommandBuilder.append("Pages/XPManager.ui");
-
-        uiEventBuilder.addEventBinding(
-                CustomUIEventBindingType.Activating,
-                "#GreetButton",
-                new EventData().append("@XPInput", "#XPInput.Value")
-        );
-    }
-
-    @Override
-    public void handleDataEvent(
-            @NonNullDecl Ref<EntityStore> ref,
-            @NonNullDecl Store<EntityStore> store,
-            @NonNullDecl Data data
-    ) {
-        Player player = store.getComponent(ref, Player.getComponentType());
-        if (player == null) return;
-
-        player.sendMessage(Message.raw("You added %s XP".formatted(data.value)));
-
-        // Must call to avoid infinite update
-        sendUpdate();
     }
 }

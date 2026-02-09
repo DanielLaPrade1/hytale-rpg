@@ -1,25 +1,66 @@
 $C = "../Common.ui";
 
-Group {
-    Anchor: (Width: 400, Height: 200);
-    Background: #1a1a2e(0.95);
+Group #PanelContainer {
     LayoutMode: Top;
-    Padding: (Full: 20);
-
-    Label #Title {
-        Text: "Tutorial Level 1";
-        Anchor: (Height: 40);
-        Style: (FontSize: 24, TextColor: #ffffff, Alignment: Center);
+    Background: (Color: #2a2a2a);
+    Anchor: (Width: 800, Height: 500);
+    Group #TopContainer {
+        LayoutMode: Left;
+        Background: (Color: #152130);
+        Anchor: (Width: 800, Height: 50);
+        Label #HytaleRPGLabel {
+            Anchor: (Width: 250, Height: 50);
+            Text: "Hytale RPG";
+            Style: (HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #ffffff, FontSize: 25, RenderBold: true, Alignment: Center);
+        }
+        Group #XPBarContainer {
+            Anchor: (Width: 350, Height: 50);
+            Background: "XPBackground.png";
+            ProgressBar #XPBar {
+                Anchor: (Width: 350, Height: 50);
+                Value: 0.5;
+                BarTexturePath: "XPFill.png";
+            }
+        }
+        Label #XPDisplay {
+            Anchor: (Width: 200, Height: 50);
+            Text: "932/1300";
+            Style: (HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #ffffff, FontSize: 25, RenderBold: true, Alignment: Center);
+        }
     }
-
-    $C.@TextField #XPInput {
-        Anchor: (Height: 35);
-        PlaceholderText: "How Much XP";
+    Group #LINEBREAKONE {
+        Background: (Color: #000000);
+        Anchor: (Width: 800, Height: 5);
     }
-
-    TextButton #GreetButton {
-        Anchor: (Height: 35);
-        Text: "Greet Me!";
+    Group #MainContainer {
+        LayoutMode: Left;
+        Background: (Color: #333333);
+        Anchor: (Width: 800, Height: 445);
+        Group #SkillTreeNav {
+            LayoutMode: Top;
+            Background: (Color: #152130);
+            Anchor: (Width: 200, Height: 445);
+            $C.@TextButton #CombatButton {
+                Anchor: (Width: 200, Height: 50);
+                Text: "Combat";
+            }
+            $C.@TextButton #MiningButton {
+                Anchor: (Width: 200, Height: 50);
+                Text: "Mining";
+            }
+            $C.@TextButton #DefenseButton {
+                Anchor: (Width: 200, Height: 50);
+                Text: "Defense";
+            }
+            $C.@TextButton #EnduranceButton {
+                Anchor: (Width: 200, Height: 50);
+                Text: "Endurance";
+            }
+        }
+        Group #LINEBREAKTWO {
+            Background: (Color: #000000);
+            Anchor: (Width: 5, Height: 445);
+        }
     }
 }
 
