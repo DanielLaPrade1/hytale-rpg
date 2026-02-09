@@ -3,5 +3,7 @@
   "Name": "HytaleRPG",
   "Version": "1.0.0",
   "Main": "com.danmods.HytaleRPGPlugin",
-  "IncludesAssetPack": true
+  "IncludesAssetPack": true,
+  "Dependencies": {},
+  "OptionalDependencies": {}
 }
