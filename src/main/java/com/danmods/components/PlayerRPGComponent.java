@@ -1,6 +1,6 @@
 package com.danmods.components;
 
-import com.danmods.level.XPTable;
+import com.danmods.level.LevelTable;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
@@ -53,23 +53,25 @@ public class PlayerRPGComponent implements Component<EntityStore> {
     }
 
     public int getLevel() {
-        return XPTable.getLevelFromXP(totalXP);
+        return LevelTable.getLevelFromXP(totalXP);
     }
 
-    public long getCurrentLevelXP() {
-        return XPTable.getXpInCurrentLevel(totalXP);
+    public long getTotalXPToNextLevel() { return LevelTable.getTotalXPToNextLevel(totalXP);}
+
+    public long getXpInCurrentLevel() {
+        return LevelTable.getXpInCurrentLevel(totalXP);
     }
 
     public long getXPToNextLevel() {
-        return XPTable.getXpToNextLevel(totalXP);
+        return LevelTable.getXpToNextLevel(totalXP);
     }
 
     public float getProgress() {
-        return XPTable.getProgressToNextLevel(totalXP);
+        return LevelTable.getProgressToNextLevel(totalXP);
     }
 
     public boolean isMaxLevel() {
-        return getLevel() > XPTable.MAX_LEVEL;
+        return getLevel() > LevelTable.MAX_LEVEL;
     }
 
     public boolean addXP(long amount) {

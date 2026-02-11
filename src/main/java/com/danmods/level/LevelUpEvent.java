@@ -1,4 +1,4 @@
-package com.danmods.events;
+package com.danmods.level;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.event.IEvent;

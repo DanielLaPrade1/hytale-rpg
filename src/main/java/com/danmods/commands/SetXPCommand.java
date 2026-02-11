@@ -1,10 +1,12 @@
 package com.danmods.commands;
 
 import com.danmods.components.PlayerRPGComponent;
-import com.danmods.pages.RPGManagerPage;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
+import com.hypixel.hytale.server.core.command.system.arguments.system.RequiredArg;
+import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
@@ -12,9 +14,12 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
-public class XPManagerCommand extends AbstractPlayerCommand {
-    public XPManagerCommand() {
-        super("open", "Open XP manager");
+public class SetXPCommand extends AbstractPlayerCommand {
+    private final RequiredArg<Integer> amountArg;
+
+    public SetXPCommand() {
+        super("set-xp", "Set your XP");
+        this.amountArg = withRequiredArg("amount", "Amount of XP (>0)", ArgTypes.INTEGER);
     }
 
     @Override
@@ -25,13 +30,14 @@ public class XPManagerCommand extends AbstractPlayerCommand {
             @NonNullDecl PlayerRef playerRef,
             @NonNullDecl World world
     ) {
-        var player = store.getComponent(ref, Player.getComponentType());
-        if (player == null) return;
+        var amount = amountArg.get(commandContext);
 
-        var rpgComponent = store.getComponent(ref, PlayerRPGComponent.getComponentType());
-        if (rpgComponent == null) return;
+        if (store.getComponent(ref, PlayerRPGComponent.getComponentType()) == null) {
+            playerRef.sendMessage(Message.raw("NO RPG data found"));
+            return;
+        }
 
-        RPGManagerPage page = new RPGManagerPage(playerRef);
-        player.getPageManager().openCustomPage(ref, store, page);
+        playerRef.sendMessage(Message.raw("XP Amount set to: %d".formatted(amount)));
+
     }
 }

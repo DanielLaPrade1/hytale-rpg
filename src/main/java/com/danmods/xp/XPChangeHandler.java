@@ -1,15 +1,14 @@
-package com.danmods.handlers;
+package com.danmods.xp;
 
 import com.danmods.components.PlayerRPGComponent;
-import com.danmods.events.GiveXPEvent;
-import com.danmods.events.LevelUpEvent;
+import com.danmods.level.LevelUpEvent;
 
 import java.util.function.Consumer;
 
-public class GiveXPHandler implements Consumer<GiveXPEvent> {
+public class XPChangeHandler implements Consumer<XPChangeEvent> {
 
     @Override
-    public void accept(GiveXPEvent event) {
+    public void accept(XPChangeEvent event) {
         var playerRef = event.playerRef();
         if (!playerRef.isValid()) return;
 

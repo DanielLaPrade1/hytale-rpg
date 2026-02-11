@@ -1,6 +1,6 @@
 package com.danmods.level;
 
-public class XPTable {
+public class LevelTable {
     private static final long[] LEVEL_THRESHOLDS = {
             0,
             100,
@@ -19,7 +19,7 @@ public class XPTable {
     public static final int MAX_LEVEL = LEVEL_THRESHOLDS.length;
     public static final int STARTING_LEVEL = 1;
 
-    private XPTable() {}
+    private LevelTable() {}
 
     public static int getLevelFromXP(long totalXP) {
         if (totalXP == 0) return STARTING_LEVEL;
@@ -29,30 +29,26 @@ public class XPTable {
             );
         }
         for (int level = MAX_LEVEL; level >= STARTING_LEVEL; level--) {
-            if (totalXP > LEVEL_THRESHOLDS[level - 1]) {return level;}
+            if (totalXP >= LEVEL_THRESHOLDS[level - 1]) {return level;}
         }
         return STARTING_LEVEL;
     }
 
-    public static long getXPFromLevel(int level) {
-        if (level <= 0) {
-            throw new IllegalArgumentException(
-                    "Level must be >= 1, got " + level
-            );
-        }
-        if (level >= MAX_LEVEL) return MAX_LEVEL;
-        return LEVEL_THRESHOLDS[level];
+    public static long getTotalXPToNextLevel(long totalXP) {
+        int level = getLevelFromXP(totalXP);
+        if (level == MAX_LEVEL) return 0L;
+        return LEVEL_THRESHOLDS[level] - LEVEL_THRESHOLDS[level - 1];
     }
 
     public static long getXpInCurrentLevel(long totalXP) {
         int level = getLevelFromXP(totalXP);
-        return totalXP - LEVEL_THRESHOLDS[level];
+        return totalXP - LEVEL_THRESHOLDS[level - 1];
     }
 
     public static long getXpToNextLevel(long totalXP) {
         int level = getLevelFromXP(totalXP);
         if (level > MAX_LEVEL) return 0L;
-        return LEVEL_THRESHOLDS[level] - totalXP;
+        return LEVEL_THRESHOLDS[level - 1] - totalXP;
     }
 
     // Decimal representation of progress to next level

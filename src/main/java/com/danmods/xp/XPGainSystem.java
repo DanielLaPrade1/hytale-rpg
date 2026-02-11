@@ -1,7 +1,6 @@
-package com.danmods.systems;
+package com.danmods.xp;
 
 import com.danmods.components.PlayerRPGComponent;
-import com.danmods.events.GiveXPEvent;
 import com.hypixel.hytale.component.Archetype;
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
@@ -50,7 +49,7 @@ public class XPGainSystem extends DeathSystems.OnDeathSystem {
        long xpAwarded = getXPFromRange();
 
        killer.sendMessage(Message.raw("+%d XP".formatted(xpAwarded)));
-       GiveXPEvent.dispatch(killerRef, xpAwarded);
+       XPChangeEvent.dispatch(killerRef, xpAwarded);
     }
 
     @NullableDecl

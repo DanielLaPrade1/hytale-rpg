@@ -5,8 +5,8 @@ import com.hypixel.hytale.server.core.command.system.basecommands.AbstractComman
 public class RPGCommandCollection extends AbstractCommandCollection {
 
     public RPGCommandCollection() {
-        super("rpg", "RPG Admin Commands");
-        addSubCommand(new XPCommand());
+        super("rpg", "RPG Commands");
+        addSubCommand(new AddXPCommand());
         addSubCommand(new StatsCommand());
         addSubCommand(new XPManagerCommand());
     }

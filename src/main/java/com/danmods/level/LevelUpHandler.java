@@ -1,6 +1,5 @@
-package com.danmods.handlers;
+package com.danmods.level;
 
-import com.danmods.events.LevelUpEvent;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 

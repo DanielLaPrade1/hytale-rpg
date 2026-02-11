@@ -32,7 +32,7 @@ Group #PanelContainer {
         }
         Label #XPDisplay {
             Anchor: (Width: 200, Height: 50);
-            Text: "933/1300";
+            Text: "";
             Style: (HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #ffffff, FontSize: 25, RenderBold: true, Alignment: Center);
         }
     }

@@ -1,7 +1,7 @@
 package com.danmods.commands;
 
 import com.danmods.components.PlayerRPGComponent;
-import com.danmods.events.GiveXPEvent;
+import com.danmods.xp.XPChangeEvent;
 import com.hypixel.hytale.codec.validation.Validators;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
@@ -15,12 +15,12 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
-public class XPCommand extends AbstractPlayerCommand {
+public class AddXPCommand extends AbstractPlayerCommand {
 
     private final RequiredArg<Integer> amountArg;
 
-    public XPCommand() {
-        super("xp", "Give yourself XP");
+    public AddXPCommand() {
+        super("add-xp", "Give yourself XP");
         this.amountArg = withRequiredArg("amount", "XP amount (>0)", ArgTypes.INTEGER)
                 .addValidator(Validators.greaterThan(0));
     }
@@ -40,6 +40,6 @@ public class XPCommand extends AbstractPlayerCommand {
         }
 
         playerRef.sendMessage(Message.raw("+%d XP".formatted(amount)));
-        GiveXPEvent.dispatch(ref, amount);
+        XPChangeEvent.dispatch(ref, amount);
     }
 }
