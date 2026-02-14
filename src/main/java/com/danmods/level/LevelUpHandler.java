@@ -1,7 +1,11 @@
 package com.danmods.level;
 
+import com.hypixel.hytale.protocol.ItemWithAllMetadata;
 import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.sun.nio.sctp.NotificationHandler;
 
 import java.util.function.Consumer;
 
@@ -21,6 +25,14 @@ public class LevelUpHandler implements Consumer<LevelUpEvent> {
             "LEVEL UP! You are now level %d".formatted(event.newLevel()) :
             "LEVEL UP! +%d levels! You are now level %d".formatted(event.levelsGained(), event.newLevel());
 
-        playerRef.sendMessage(Message.raw(message));
+        var icon = new ItemStack("Tool_Growth_Potion", 1).toPacket();
+
+        NotificationUtil.sendNotification(
+                playerRef.getPacketHandler(),
+                Message.raw(message).color("#FFD700"),
+                Message.raw("").color("#FFD700"),
+                icon
+        );
+
     }
 }

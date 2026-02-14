@@ -20,7 +20,7 @@ public class XPChangeHandler implements Consumer<XPChangeEvent> {
 
         // Apply XP accordingly
         switch (event.reason()) {
-            case COMMAND_ADD, ENEMY_KILL:
+            case COMMAND_ADD, ENEMY_KILL, MINING:
                 int oldLevel = playerRPGComponent.getLevel();
                 boolean leveledUp = playerRPGComponent.addXP(event.amount());
                 if (leveledUp) LevelUpEvent.dispatch(eventPlayerRef, oldLevel, playerRPGComponent.getLevel());

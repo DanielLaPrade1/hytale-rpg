@@ -1,22 +1,26 @@
-package com.danmods.xp;
+package com.danmods.systems.combat;
 
 import com.danmods.components.PlayerRPGComponent;
+import com.danmods.xp.XPChangeEvent;
+import com.danmods.xp.XPChangeReason;
 import com.hypixel.hytale.component.Archetype;
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.modules.entity.component.DisplayNameComponent;
 import com.hypixel.hytale.server.core.modules.entity.damage.Damage;
 import com.hypixel.hytale.server.core.modules.entity.damage.DeathComponent;
 import com.hypixel.hytale.server.core.modules.entity.damage.DeathSystems;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 
-public class XPGainSystem extends DeathSystems.OnDeathSystem {
+public class EnemyXPGainSystem extends DeathSystems.OnDeathSystem {
     public static final long MIN_XP_FROM_KILL = 33;
     public static final long MAX_XP_FROM_KILL = 52;
 
@@ -48,8 +52,16 @@ public class XPGainSystem extends DeathSystems.OnDeathSystem {
 
        long xpAwarded = getXPFromRange();
 
-       killer.sendMessage(Message.raw("+%d XP".formatted(xpAwarded)));
        XPChangeEvent.dispatch(killerRef, xpAwarded, XPChangeReason.ENEMY_KILL);
+
+       var enemyNameRef = store.getComponent(ref, DisplayNameComponent.getComponentType());
+       if (enemyNameRef == null) return;
+
+       NotificationUtil.sendNotification(
+                killer.getPacketHandler(),
+                Message.raw("+%d XP".formatted(xpAwarded)).color("#FFD700"),
+                enemyNameRef.getDisplayName().color("#FFD700")
+        );
     }
 
     @NullableDecl
@@ -61,7 +73,7 @@ public class XPGainSystem extends DeathSystems.OnDeathSystem {
     // Return random XP amount within range
     private long getXPFromRange() {
         return (long) (Math.random()
-                * (XPGainSystem.MAX_XP_FROM_KILL - XPGainSystem.MIN_XP_FROM_KILL)
-                + XPGainSystem.MIN_XP_FROM_KILL);
+                * (EnemyXPGainSystem.MAX_XP_FROM_KILL - EnemyXPGainSystem.MIN_XP_FROM_KILL)
+                + EnemyXPGainSystem.MIN_XP_FROM_KILL);
     }
 }

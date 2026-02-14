@@ -15,7 +15,7 @@ Group #PanelContainer {
     Padding: (Full: 5);
     Group #TopContainer {
         LayoutMode: Left;
-        Background: (Color: #152130);
+        Background: #152130(0.9);
         Anchor: (Width: 800, Height: 50);
         Label #HytaleRPGLabel {
             Anchor: (Width: 250, Height: 50);
@@ -33,18 +33,15 @@ Group #PanelContainer {
         }
         Group #XPLevelContainer {
             LayoutMode: Top;
-            Background: (Color: #152130);
             Padding: (Top: 2);
             Label #XPDisplay {
                 Anchor: (Width: 200, Height: 25);
-                FlexWeight: 0;
                 Padding: (Top: 5);
                 Text: "xxxx/xxxx";
                 Style: (HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #ffffff, FontSize: 25, RenderBold: true, Alignment: Center);
             }
             Label #LevelDisplay {
                 Anchor: (Width: 200, Height: 25);
-                FlexWeight: 0;
                 Padding: (Bottom: 2);
                 Text: "(Level x)";
                 Style: (TextColor: #ffffff, FontSize: 10, Alignment: Center);
@@ -52,16 +49,16 @@ Group #PanelContainer {
         }
     }
     Group #LINEBREAKONE {
-        Background: (Color: #000000);
+        Background: #000000(0.9);
         Anchor: (Width: 800, Height: 5);
     }
     Group #MainContainer {
         LayoutMode: Left;
-        Background: (Color: #333333);
+        Background: #333333(0.9);
         Anchor: (Width: 800, Height: 445);
         Group #SkillTreeNav {
             LayoutMode: Top;
-            Background: (Color: #152130);
+            Background: #152130(0.5);
             Anchor: (Width: 200, Height: 445);
             $C.@TextButton #CombatButton {
                 Anchor: (Width: 200, Height: 50);
@@ -89,7 +86,7 @@ Group #PanelContainer {
             }
         }
         Group #LINEBREAKTWO {
-            Background: (Color: #000000);
+            Background: #000000(0.9);
             Anchor: (Width: 5, Height: 445);
         }
     }
