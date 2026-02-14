@@ -38,7 +38,11 @@ public class RPGManagerPage extends InteractiveCustomUIPage<RPGManagerPage.Data>
         var rpgComponent = store.getComponent(ref, PlayerRPGComponent.getComponentType());
         if (rpgComponent == null) return;
         // Set Values of UI Elements
-        uiCommandBuilder.set("#XPDisplay.Text", "%d / %d".formatted(rpgComponent.getXpInCurrentLevel(), rpgComponent.getTotalXPToNextLevel()));
+        uiCommandBuilder.set("#XPDisplay.Text", "%d / %d".formatted(
+                rpgComponent.getXpInCurrentLevel(),
+                rpgComponent.getTotalXPToNextLevel()));
+        uiCommandBuilder.set("#LevelDisplay.Text", "(Level %d)".formatted(
+                rpgComponent.getLevel()));
         uiCommandBuilder.set("#XPBar.Value", rpgComponent.getProgress());
 
     }

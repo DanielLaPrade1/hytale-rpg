@@ -49,7 +49,7 @@ public class XPGainSystem extends DeathSystems.OnDeathSystem {
        long xpAwarded = getXPFromRange();
 
        killer.sendMessage(Message.raw("+%d XP".formatted(xpAwarded)));
-       XPChangeEvent.dispatch(killerRef, xpAwarded);
+       XPChangeEvent.dispatch(killerRef, xpAwarded, XPChangeReason.ENEMY_KILL);
     }
 
     @NullableDecl

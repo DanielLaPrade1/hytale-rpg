@@ -41,7 +41,7 @@ public class PlayerRPGComponent implements Component<EntityStore> {
     public PlayerRPGComponent() {}
 
     public PlayerRPGComponent(long XP) {
-        this.totalXP = Math.max(0L, XP);
+        this.totalXP = XP;
     }
 
     public long getTotalXP() {
@@ -49,7 +49,7 @@ public class PlayerRPGComponent implements Component<EntityStore> {
     }
 
     public void setTotalXP(long XP) {
-        this.totalXP = Math.max(0L, XP);
+        totalXP = Math.max(0L, XP);
     }
 
     public int getLevel() {
@@ -82,7 +82,6 @@ public class PlayerRPGComponent implements Component<EntityStore> {
         int newLevel = getLevel();
 
         return newLevel > oldLevel;
-
     }
 
     // Overwritten Component Methods

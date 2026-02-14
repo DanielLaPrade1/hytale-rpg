@@ -10,8 +10,9 @@ $C = "../Common.ui";
 
 Group #PanelContainer {
     LayoutMode: Top;
-    Background: (Color: #2a2a2a);
-    Anchor: (Width: 800, Height: 500);
+    Background: "PanelBackground.png";
+    Anchor: (Width: 810, Height: 510);
+    Padding: (Full: 5);
     Group #TopContainer {
         LayoutMode: Left;
         Background: (Color: #152130);
@@ -30,10 +31,24 @@ Group #PanelContainer {
                 BarTexturePath: "XPFill.png";
             }
         }
-        Label #XPDisplay {
-            Anchor: (Width: 200, Height: 50);
-            Text: "";
-            Style: (HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #ffffff, FontSize: 25, RenderBold: true, Alignment: Center);
+        Group #XPLevelContainer {
+            LayoutMode: Top;
+            Background: (Color: #152130);
+            Padding: (Top: 2);
+            Label #XPDisplay {
+                Anchor: (Width: 200, Height: 25);
+                FlexWeight: 0;
+                Padding: (Top: 5);
+                Text: "xxxx/xxxx";
+                Style: (HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #ffffff, FontSize: 25, RenderBold: true, Alignment: Center);
+            }
+            Label #LevelDisplay {
+                Anchor: (Width: 200, Height: 25);
+                FlexWeight: 0;
+                Padding: (Bottom: 2);
+                Text: "(Level x)";
+                Style: (TextColor: #ffffff, FontSize: 10, Alignment: Center);
+            }
         }
     }
     Group #LINEBREAKONE {

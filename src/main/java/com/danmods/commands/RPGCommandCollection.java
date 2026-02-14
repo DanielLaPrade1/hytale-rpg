@@ -7,6 +7,7 @@ public class RPGCommandCollection extends AbstractCommandCollection {
     public RPGCommandCollection() {
         super("rpg", "RPG Commands");
         addSubCommand(new AddXPCommand());
+        addSubCommand(new SetXPCommand());
         addSubCommand(new StatsCommand());
         addSubCommand(new XPManagerCommand());
     }

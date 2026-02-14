@@ -4,9 +4,10 @@ import com.danmods.commands.RPGCommandCollection;
 import com.danmods.components.PlayerRPGComponent;
 import com.danmods.xp.XPChangeEvent;
 import com.danmods.level.LevelUpEvent;
-import com.danmods.xp.GiveXPHandler;
+import com.danmods.xp.XPChangeHandler;
 import com.danmods.level.LevelUpHandler;
 import com.danmods.systems.PlayerJoinSystem;
+import com.danmods.xp.XPChangeHandler;
 import com.danmods.xp.XPGainSystem;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
@@ -36,7 +37,7 @@ public class HytaleRPGPlugin extends JavaPlugin {
         // Event and Handler Registries
         var eventRegistry = getEventRegistry();
 
-        eventRegistry.register(XPChangeEvent.class, new GiveXPHandler());
+        eventRegistry.register(XPChangeEvent.class, new XPChangeHandler());
         eventRegistry.register(LevelUpEvent.class, new LevelUpHandler());
 
         // Command Registries

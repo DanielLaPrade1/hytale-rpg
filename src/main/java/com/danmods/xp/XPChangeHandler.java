@@ -2,6 +2,7 @@ package com.danmods.xp;
 
 import com.danmods.components.PlayerRPGComponent;
 import com.danmods.level.LevelUpEvent;
+import com.hypixel.hytale.server.core.entity.entities.Player;
 
 import java.util.function.Consumer;
 
@@ -9,19 +10,24 @@ public class XPChangeHandler implements Consumer<XPChangeEvent> {
 
     @Override
     public void accept(XPChangeEvent event) {
-        var playerRef = event.playerRef();
-        if (!playerRef.isValid()) return;
+        var eventPlayerRef = event.playerRef();
+        if (!eventPlayerRef.isValid()) return;
 
-        var store = playerRef.getStore();
+        var store = eventPlayerRef.getStore();
 
-        var playerRPGComponent = store.getComponent(playerRef, PlayerRPGComponent.getComponentType());
+        var playerRPGComponent = store.getComponent(eventPlayerRef, PlayerRPGComponent.getComponentType());
         if (playerRPGComponent == null) return;
 
-        // Add XP and check for level up
-
-        int oldLevel = playerRPGComponent.getLevel();
-        boolean leveledUp = playerRPGComponent.addXP(event.amount());
-
-        if (leveledUp) LevelUpEvent.dispatch(playerRef, oldLevel, playerRPGComponent.getLevel());
+        // Apply XP accordingly
+        switch (event.reason()) {
+            case COMMAND_ADD, ENEMY_KILL:
+                int oldLevel = playerRPGComponent.getLevel();
+                boolean leveledUp = playerRPGComponent.addXP(event.amount());
+                if (leveledUp) LevelUpEvent.dispatch(eventPlayerRef, oldLevel, playerRPGComponent.getLevel());
+                break;
+            case COMMAND_SET:
+                playerRPGComponent.setTotalXP(event.amount());
+                break;
+        }
     }
 }

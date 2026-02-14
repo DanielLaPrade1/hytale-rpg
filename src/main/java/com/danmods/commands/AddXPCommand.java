@@ -2,6 +2,7 @@ package com.danmods.commands;
 
 import com.danmods.components.PlayerRPGComponent;
 import com.danmods.xp.XPChangeEvent;
+import com.danmods.xp.XPChangeReason;
 import com.hypixel.hytale.codec.validation.Validators;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
@@ -39,7 +40,7 @@ public class AddXPCommand extends AbstractPlayerCommand {
             return;
         }
 
+        XPChangeEvent.dispatch(ref, amount, XPChangeReason.COMMAND_ADD);
         playerRef.sendMessage(Message.raw("+%d XP".formatted(amount)));
-        XPChangeEvent.dispatch(ref, amount);
     }
 }

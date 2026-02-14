@@ -10,16 +10,17 @@ import javax.annotation.Nonnull;
 
 public record XPChangeEvent(
         @Nonnull Ref<EntityStore> playerRef,
-        long amount
+        long amount,
+        XPChangeReason reason
 )  implements IEvent<Void> {
-    public static void dispatch(Ref<EntityStore> playerRef, long amount) {
+    public static void dispatch(Ref<EntityStore> playerRef, long amount, XPChangeReason reason) {
         // Control event bus logic
         IEventDispatcher<XPChangeEvent, XPChangeEvent> dispatcher =
                 HytaleServer.get().getEventBus().dispatchFor(XPChangeEvent.class);
 
         // create object if it has listeners
         if (dispatcher.hasListener()) {
-            dispatcher.dispatch(new XPChangeEvent(playerRef, amount));
+            dispatcher.dispatch(new XPChangeEvent(playerRef, amount, reason));
         }
     }
 }
