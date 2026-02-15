@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class OreTable {
     private static final Map<String, Integer> ORE_TABLE = Map.of(
-            "Ore_Adamantite", 95,
+            "Ore_Adamantite", 105,
             "Ore_Cobalt", 70,
             "Ore_Gold", 55,
             "Ore_Silver", 50,
