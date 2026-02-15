@@ -44,19 +44,22 @@ public class MiningXPGainSystem extends EntityEventSystem<EntityStore, BreakBloc
         // Check if block is ore
         var blockId = blockItem.getId();
         if (blockId.startsWith("Ore_")) {
-            // Cut off ore name at second '_' index
+            // Cut off ore name at second '_' index for lookup
             int undIndex1 = blockId.indexOf('_');
             int undIndex2 = blockId.indexOf('_', undIndex1 + 1);
             String oreName = blockId.substring(0, undIndex2);
 
+
             int xpAwarded = OreTable.getXPFromOre(oreName);
             XPChangeEvent.dispatch(ref, xpAwarded, XPChangeReason.MINING);
 
+            // Send Mining Notification
+            String oreTranslationKey = blockItem.getTranslationKey();
             var icon = new ItemStack(blockId, 1).toPacket();
             NotificationUtil.sendNotification(
                     playerRef.getPacketHandler(),
                     Message.raw("+%d XP".formatted(xpAwarded)).color("#FFD700"),
-                    Message.raw("").color("#FFD700"),
+                    Message.translation(oreTranslationKey).color("#D9D9D9"),
                     icon
             );
         }

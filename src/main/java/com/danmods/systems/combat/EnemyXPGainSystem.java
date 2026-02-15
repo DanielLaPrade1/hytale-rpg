@@ -9,6 +9,7 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.modules.entity.component.DisplayNameComponent;
 import com.hypixel.hytale.server.core.modules.entity.damage.Damage;
 import com.hypixel.hytale.server.core.modules.entity.damage.DeathComponent;
@@ -54,13 +55,15 @@ public class EnemyXPGainSystem extends DeathSystems.OnDeathSystem {
 
        XPChangeEvent.dispatch(killerRef, xpAwarded, XPChangeReason.ENEMY_KILL);
 
+       // Send enemy kill notification
        var enemyNameRef = store.getComponent(ref, DisplayNameComponent.getComponentType());
        if (enemyNameRef == null) return;
-
+       var icon = new ItemStack("Deco_Bone_Skulls", 1).toPacket();
        NotificationUtil.sendNotification(
                 killer.getPacketHandler(),
                 Message.raw("+%d XP".formatted(xpAwarded)).color("#FFD700"),
-                enemyNameRef.getDisplayName().color("#FFD700")
+                enemyNameRef.getDisplayName().color("#D9D9D9"),
+                icon
         );
     }
 

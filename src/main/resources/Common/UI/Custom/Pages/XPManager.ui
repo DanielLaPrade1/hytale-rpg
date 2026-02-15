@@ -7,88 +7,91 @@ $C = "../Common.ui";
     Disabled: (Background: $C.@DefaultSquareButtonDisabledBackground, LabelStyle: $C.@DefaultButtonDisabledLabelStyle),
     Sounds: $C.@ButtonSounds,
 );
-
-Group #PanelContainer {
-    LayoutMode: Top;
-    Background: "PanelBackground.png";
-    Anchor: (Width: 810, Height: 510);
-    Padding: (Full: 5);
-    Group #TopContainer {
-        LayoutMode: Left;
-        Background: #152130(0.9);
-        Anchor: (Width: 800, Height: 50);
-        Label #HytaleRPGLabel {
-            Anchor: (Width: 250, Height: 50);
-            Text: "Hytale RPG";
-            Style: (HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #ffffff, FontSize: 25, RenderBold: true, Alignment: Center);
-        }
-        Group #XPBarContainer {
-            Anchor: (Width: 350, Height: 50);
-            Background: "XPBackground.png";
-            ProgressBar #XPBar {
-                Anchor: (Width: 350, Height: 50);
-                Value: 0.5;
-                BarTexturePath: "XPFill.png";
-            }
-        }
-        Group #XPLevelContainer {
+$C.@PageOverlay {
+    $C.@Container {
+        Anchor: (Width: 925, Height: 631);
+        Padding: (Full: 7);
+        Group #PanelContainer {
             LayoutMode: Top;
-            Padding: (Top: 2);
-            Label #XPDisplay {
-                Anchor: (Width: 200, Height: 25);
-                Padding: (Top: 5);
-                Text: "xxxx/xxxx";
-                Style: (HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #ffffff, FontSize: 25, RenderBold: true, Alignment: Center);
+            Background: "PanelBackground.png";
+            Anchor: (Width: 900, Height: 600);
+            Group #TopContainer {
+                LayoutMode: Left;
+                Background: #152130(0.9);
+                Anchor: (Width: 900, Height: 50);
+                Label #HytaleRPGLabel {
+                    Anchor: (Width: 250, Height: 50);
+                    Text: "Hytale RPG";
+                    Style: (HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #ffffff, FontSize: 25, RenderBold: true, Alignment: Center);
+                }
+                Group #XPBarContainer {
+                    Anchor: (Width: 450, Height: 50);
+                    Background: "XPBackground.png";
+                    ProgressBar #XPBar {
+                        Anchor: (Width: 450, Height: 50);
+                        Value: 0;
+                        BarTexturePath: "XPFill.png";
+                    }
+                }
+                Group #XPLevelContainer {
+                    LayoutMode: Top;
+                    Padding: (Top: 2);
+                    Label #XPDisplay {
+                        Anchor: (Width: 200, Height: 25);
+                        Padding: (Top: 5);
+                        Text: "xxxx/xxxx";
+                        Style: (HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #ffffff, FontSize: 25, RenderBold: true, Alignment: Center);
+                    }
+                    Label #LevelDisplay {
+                        Anchor: (Width: 200, Height: 25);
+                        Padding: (Bottom: 2);
+                        Text: "(Level x)";
+                        Style: (TextColor: #ffffff, FontSize: 10, Alignment: Center);
+                    }
+                }
             }
-            Label #LevelDisplay {
-                Anchor: (Width: 200, Height: 25);
-                Padding: (Bottom: 2);
-                Text: "(Level x)";
-                Style: (TextColor: #ffffff, FontSize: 10, Alignment: Center);
+            Group #LINEBREAKONE {
+                Background: #000000(0.9);
+                Anchor: (Width: 900, Height: 5);
             }
-        }
-    }
-    Group #LINEBREAKONE {
-        Background: #000000(0.9);
-        Anchor: (Width: 800, Height: 5);
-    }
-    Group #MainContainer {
-        LayoutMode: Left;
-        Background: #333333(0.9);
-        Anchor: (Width: 800, Height: 445);
-        Group #SkillTreeNav {
-            LayoutMode: Top;
-            Background: #152130(0.5);
-            Anchor: (Width: 200, Height: 445);
-            $C.@TextButton #CombatButton {
-                Anchor: (Width: 200, Height: 50);
-                Text: "Combat";
-                Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
-                Style: @CustomButtonStyle;
+            Group #MainContainer {
+                LayoutMode: Left;
+                Background: #333333(0.9);
+                Anchor: (Width: 900, Height: 548);
+                Group #SkillTreeNav {
+                    LayoutMode: Top;
+                    Background: #152130(0.5);
+                    Anchor: (Width: 200, Height: 548);
+                    $C.@TextButton #CombatButton {
+                        Anchor: (Width: 200, Height: 50);
+                        Text: "Combat";
+                        Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
+                        Style: @CustomButtonStyle;
+                    }
+                    $C.@TextButton #MiningButton {
+                        Anchor: (Width: 200, Height: 50);
+                        Text: "Mining";
+                        Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
+                        Style: @CustomButtonStyle;
+                    }
+                    $C.@TextButton #DefenseButton {
+                        Anchor: (Width: 200, Height: 50);
+                        Text: "Defense";
+                        Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
+                        Style: @CustomButtonStyle;
+                    }
+                    $C.@TextButton #EnduranceButton {
+                        Anchor: (Width: 200, Height: 50);
+                        Text: "Endurance";
+                        Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
+                        Style: @CustomButtonStyle;
+                    }
+                }
+                Group #LINEBREAKTWO {
+                    Background: #000000(0.9);
+                    Anchor: (Width: 5, Height: 548);
+                }
             }
-            $C.@TextButton #MiningButton {
-                Anchor: (Width: 200, Height: 50);
-                Text: "Mining";
-                Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
-                Style: @CustomButtonStyle;
-            }
-            $C.@TextButton #DefenseButton {
-                Anchor: (Width: 200, Height: 50);
-                Text: "Defense";
-                Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
-                Style: @CustomButtonStyle;
-            }
-            $C.@TextButton #EnduranceButton {
-                Anchor: (Width: 200, Height: 50);
-                Text: "Endurance";
-                Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
-                Style: @CustomButtonStyle;
-            }
-        }
-        Group #LINEBREAKTWO {
-            Background: #000000(0.9);
-            Anchor: (Width: 5, Height: 445);
         }
     }
 }
-

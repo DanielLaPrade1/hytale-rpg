@@ -1,7 +1,5 @@
 package com.danmods.systems.mining;
 
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
 
 public class OreTable {
