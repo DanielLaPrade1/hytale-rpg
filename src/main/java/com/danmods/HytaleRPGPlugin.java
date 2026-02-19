@@ -2,6 +2,7 @@ package com.danmods;
 
 import com.danmods.commands.RPGCommandCollection;
 import com.danmods.components.PlayerRPGComponent;
+import com.danmods.config.MiningConfig;
 import com.danmods.systems.mining.MiningXPGainSystem;
 import com.danmods.xp.XPChangeEvent;
 import com.danmods.level.LevelUpEvent;
@@ -11,16 +12,24 @@ import com.danmods.systems.PlayerJoinSystem;
 import com.danmods.systems.combat.EnemyXPGainSystem;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.util.Config;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 public class HytaleRPGPlugin extends JavaPlugin {
+    private Config<MiningConfig> miningConfig;
+    private MiningXPGainSystem miningSystem;
+
     public HytaleRPGPlugin(@NonNullDecl JavaPluginInit init) {
         super(init);
+        miningConfig = withConfig("miningxp", MiningConfig.CODEC);
     }
 
     @Override
     protected void setup() {
         var storeRegistry = getEntityStoreRegistry();
+
+        // Config Loader (JSON Files)
+        miningConfig.save();
 
         // Component Registries
         var rpgType = storeRegistry.registerComponent(
@@ -33,7 +42,6 @@ public class HytaleRPGPlugin extends JavaPlugin {
         // System Registries
         storeRegistry.registerSystem(new PlayerJoinSystem());
         storeRegistry.registerSystem(new EnemyXPGainSystem());
-        storeRegistry.registerSystem(new MiningXPGainSystem());
 
         // Event and Handler Registries
         var eventRegistry = getEventRegistry();
@@ -45,7 +53,12 @@ public class HytaleRPGPlugin extends JavaPlugin {
         var commandRegistry = getCommandRegistry();
 
         commandRegistry.registerCommand(new RPGCommandCollection());
+    }
 
-
+    @Override
+    public void start() {
+        MiningConfig mc = miningConfig.get();
+        var storeRegistry = getEntityStoreRegistry();
+        storeRegistry.registerSystem(new MiningXPGainSystem(mc));
     }
 }

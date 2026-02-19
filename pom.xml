@@ -17,10 +17,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.hytale</groupId>
+            <groupId>com.hypixel.hytale</groupId>
             <artifactId>hytale-server</artifactId>
             <version>1.0.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.18.2</version>
         </dependency>
     </dependencies>
 
@@ -41,6 +46,7 @@
             </resource>
         </resources>
         <plugins>
+            <!-- antrun for hot reloading into mods folder -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>

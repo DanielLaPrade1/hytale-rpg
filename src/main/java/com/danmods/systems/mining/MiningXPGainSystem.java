@@ -1,5 +1,6 @@
 package com.danmods.systems.mining;
 
+import com.danmods.config.MiningConfig;
 import com.danmods.xp.XPChangeEvent;
 import com.danmods.xp.XPChangeReason;
 import com.hypixel.hytale.component.ArchetypeChunk;
@@ -16,9 +17,15 @@ import com.hypixel.hytale.server.core.util.NotificationUtil;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
+import java.io.File;
+import java.util.Map;
+
 public class MiningXPGainSystem extends EntityEventSystem<EntityStore, BreakBlockEvent> {
-    public MiningXPGainSystem() {
+    private MiningConfig miningConfig;
+
+    public MiningXPGainSystem(MiningConfig miningConfig) {
         super(BreakBlockEvent.class);
+        this.miningConfig = miningConfig;
     }
 
     @Override
@@ -47,10 +54,17 @@ public class MiningXPGainSystem extends EntityEventSystem<EntityStore, BreakBloc
             // Cut off ore name at second '_' index for lookup
             int undIndex1 = blockId.indexOf('_');
             int undIndex2 = blockId.indexOf('_', undIndex1 + 1);
-            String oreName = blockId.substring(0, undIndex2);
+            String oreName = blockId.substring(undIndex1 + 1, undIndex2);
+            System.out.println(oreName);
 
 
-            int xpAwarded = OreTable.getXPFromOre(oreName);
+            // Get ores from config
+            Map<String, Integer> ores = miningConfig.getOres();
+
+            System.out.println(oreName);
+            System.out.println(ores.toString());
+
+            int xpAwarded = ores.getOrDefault(oreName, 0);
             XPChangeEvent.dispatch(ref, xpAwarded, XPChangeReason.MINING);
 
             // Send Mining Notification
