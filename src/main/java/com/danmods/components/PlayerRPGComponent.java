@@ -7,20 +7,8 @@ import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
-import com.danmods.commands.RPGCommandCollection;
-import com.danmods.components.PlayerRPGComponent;
-import com.danmods.level.LevelConfig;
-import com.danmods.systems.mining.MiningConfig;
-import com.danmods.systems.mining.MiningXPGainSystem;
-import com.danmods.xp.XPChangeEvent;
-import com.danmods.xp.XPChangeHandler;
-import com.danmods.systems.PlayerJoinSystem;
-import com.danmods.systems.combat.EnemyXPGainSystem;
-import com.hypixel.hytale.server.core.plugin.JavaPlugin;
-import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.util.Config;
-import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 public class PlayerRPGComponent implements Component<EntityStore> {
 
@@ -84,7 +72,7 @@ public class PlayerRPGComponent implements Component<EntityStore> {
     }
 
     public boolean isMaxLevel() {
-        return getLevel() > LevelTable.MAX_LEVEL;
+        return getLevel() > LevelTable.getMaxLevel();
     }
 
     public boolean addXP(long amount) {

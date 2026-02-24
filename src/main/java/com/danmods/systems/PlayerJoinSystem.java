@@ -14,11 +14,7 @@ import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 public class PlayerJoinSystem extends RefSystem<EntityStore> {
 
-    private LevelConfig levelConfig;
-
-    public PlayerJoinSystem(LevelConfig levelConfig) {
-        this.levelConfig = levelConfig;
-    }
+    public PlayerJoinSystem() {}
 
     @Override
     public void onEntityAdded(

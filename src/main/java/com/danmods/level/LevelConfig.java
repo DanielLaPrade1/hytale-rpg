@@ -18,7 +18,6 @@ public class LevelConfig {
 
     public LevelConfig() {}
 
-
     public long[] getlevelThresholds() {
         return levelThresholds;
     }
