@@ -2,7 +2,9 @@ package com.danmods;
 
 import com.danmods.commands.RPGCommandCollection;
 import com.danmods.components.PlayerRPGComponent;
-import com.danmods.config.MiningConfig;
+import com.danmods.level.LevelConfig;
+import com.danmods.level.LevelTable;
+import com.danmods.systems.mining.MiningConfig;
 import com.danmods.systems.mining.MiningXPGainSystem;
 import com.danmods.xp.XPChangeEvent;
 import com.danmods.level.LevelUpEvent;
@@ -17,11 +19,13 @@ import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 public class HytaleRPGPlugin extends JavaPlugin {
     private Config<MiningConfig> miningConfig;
+    private Config<LevelConfig> levelConfig;
     private MiningXPGainSystem miningSystem;
 
     public HytaleRPGPlugin(@NonNullDecl JavaPluginInit init) {
         super(init);
         miningConfig = withConfig("miningxp", MiningConfig.CODEC);
+        levelConfig = withConfig("playerrpg", LevelConfig.CODEC);
     }
 
     @Override
@@ -30,6 +34,7 @@ public class HytaleRPGPlugin extends JavaPlugin {
 
         // Config Loader (JSON Files)
         miningConfig.save();
+        levelConfig.save();
 
         // Component Registries
         var rpgType = storeRegistry.registerComponent(
@@ -40,7 +45,6 @@ public class HytaleRPGPlugin extends JavaPlugin {
         PlayerRPGComponent.setComponentType(rpgType);
 
         // System Registries
-        storeRegistry.registerSystem(new PlayerJoinSystem());
         storeRegistry.registerSystem(new EnemyXPGainSystem());
 
         // Event and Handler Registries
@@ -57,8 +61,12 @@ public class HytaleRPGPlugin extends JavaPlugin {
 
     @Override
     public void start() {
-        MiningConfig mc = miningConfig.get();
         var storeRegistry = getEntityStoreRegistry();
+
+        MiningConfig mc = miningConfig.get();
         storeRegistry.registerSystem(new MiningXPGainSystem(mc));
+
+        LevelConfig lvlConfig = levelConfig.get();
+        LevelTable.setLevelTable(lvlConfig);
     }
 }

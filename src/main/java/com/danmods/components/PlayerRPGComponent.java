@@ -1,19 +1,34 @@
 package com.danmods.components;
 
-import com.danmods.level.LevelTable;
-    import com.hypixel.hytale.codec.Codec;
+import com.danmods.level.*;
+import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+import com.danmods.commands.RPGCommandCollection;
+import com.danmods.components.PlayerRPGComponent;
+import com.danmods.level.LevelConfig;
+import com.danmods.systems.mining.MiningConfig;
+import com.danmods.systems.mining.MiningXPGainSystem;
+import com.danmods.xp.XPChangeEvent;
+import com.danmods.xp.XPChangeHandler;
+import com.danmods.systems.PlayerJoinSystem;
+import com.danmods.systems.combat.EnemyXPGainSystem;
+import com.hypixel.hytale.server.core.plugin.JavaPlugin;
+import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.util.Config;
+import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 public class PlayerRPGComponent implements Component<EntityStore> {
 
     // Component Type Holder
 
     private static ComponentType<EntityStore, PlayerRPGComponent> TYPE;
+
+    public PlayerRPGComponent() {}
 
     public static void setComponentType(ComponentType<EntityStore, PlayerRPGComponent> type) {
         TYPE = type;
@@ -25,8 +40,8 @@ public class PlayerRPGComponent implements Component<EntityStore> {
 
     // Component Codec
 
-    public static final BuilderCodec<PlayerRPGComponent> CODEC = BuilderCodec
-            .builder(PlayerRPGComponent.class, PlayerRPGComponent::new)
+    public static final BuilderCodec<PlayerRPGComponent> CODEC =
+            BuilderCodec.builder(PlayerRPGComponent.class, PlayerRPGComponent::new)
             .append(
                     new KeyedCodec<>("TotalXP", Codec.LONG),
                     (component, value) -> component.totalXP = value,
@@ -37,8 +52,6 @@ public class PlayerRPGComponent implements Component<EntityStore> {
     // Component Constructors and Logic
 
     private long totalXP = 0;
-
-    public PlayerRPGComponent() {}
 
     public PlayerRPGComponent(long XP) {
         this.totalXP = XP;

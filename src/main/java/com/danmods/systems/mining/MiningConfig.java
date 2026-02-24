@@ -1,4 +1,4 @@
-package com.danmods.config;
+package com.danmods.systems.mining;
 
 import com.hypixel.hytale.codec.Codec;
 
@@ -6,7 +6,6 @@ import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.codecs.map.ObjectMapCodec;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ public class MiningConfig {
     private Map<String, Integer> blocks;
 
     public static final BuilderCodec<MiningConfig> CODEC = BuilderCodec.builder(MiningConfig.class, MiningConfig::new)
-            // Map<String,Integer> for Ores
             .append(
                     new KeyedCodec<>("Ores",
                             new ObjectMapCodec<>(

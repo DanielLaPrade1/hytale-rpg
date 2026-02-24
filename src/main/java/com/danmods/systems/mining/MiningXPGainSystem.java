@@ -1,6 +1,5 @@
 package com.danmods.systems.mining;
 
-import com.danmods.config.MiningConfig;
 import com.danmods.xp.XPChangeEvent;
 import com.danmods.xp.XPChangeReason;
 import com.hypixel.hytale.component.ArchetypeChunk;
@@ -17,7 +16,6 @@ import com.hypixel.hytale.server.core.util.NotificationUtil;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
-import java.io.File;
 import java.util.Map;
 
 public class MiningXPGainSystem extends EntityEventSystem<EntityStore, BreakBlockEvent> {
@@ -55,13 +53,11 @@ public class MiningXPGainSystem extends EntityEventSystem<EntityStore, BreakBloc
             int undIndex1 = blockId.indexOf('_');
             int undIndex2 = blockId.indexOf('_', undIndex1 + 1);
             String oreName = blockId.substring(undIndex1 + 1, undIndex2);
-            System.out.println(oreName);
 
 
             // Get ores from config
             Map<String, Integer> ores = miningConfig.getOres();
 
-            System.out.println(oreName);
             System.out.println(ores.toString());
 
             int xpAwarded = ores.getOrDefault(oreName, 0);

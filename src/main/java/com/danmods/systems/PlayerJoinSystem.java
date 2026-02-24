@@ -1,6 +1,8 @@
 package com.danmods.systems;
 
 import com.danmods.components.PlayerRPGComponent;
+import com.danmods.level.LevelConfig;
+import com.danmods.systems.mining.MiningConfig;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.RefSystem;
@@ -12,6 +14,11 @@ import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 public class PlayerJoinSystem extends RefSystem<EntityStore> {
 
+    private LevelConfig levelConfig;
+
+    public PlayerJoinSystem(LevelConfig levelConfig) {
+        this.levelConfig = levelConfig;
+    }
 
     @Override
     public void onEntityAdded(
