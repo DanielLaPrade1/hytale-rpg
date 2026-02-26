@@ -2,8 +2,16 @@
   "Group": "com.danmods",
   "Name": "HytaleRPG",
   "Version": "1.0.0",
-  "Main": "com.danmods.HytaleRPGPlugin",
+  "Authors": [
+    {
+      "Name": "Daniel LaPrade",
+      "Email": "daniellaprade1@gmail.com",
+      "Url": "https://github.com/DanielLaPrade1"
+    }
+  ],
+  "ServerVersion": "2026.02.19-1a311a592",
   "IncludesAssetPack": true,
   "Dependencies": {},
-  "OptionalDependencies": {}
+  "OptionalDependencies": {},
+  "Main": "com.danmods.HytaleRPGPlugin"
 }

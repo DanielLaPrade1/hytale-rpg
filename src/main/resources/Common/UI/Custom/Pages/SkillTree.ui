@@ -1,0 +1,10 @@
+$C = "../Common.ui";
+
+Group {
+  Anchor: (Width: 695, Height: 548);
+  Label #SkillLabel {
+    FlexWeight: 1;
+    Text: "";
+    Style: (TextColor: #ffffff, FontSize: 50, Alignment: Center);
+  }
+}

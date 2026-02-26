@@ -1,12 +1,16 @@
 $C = "../Common.ui";
 
-@CustomButtonStyle = TextButtonStyle(
+@NavButton = TextButtonStyle(
     Default: (Background: $C.@DefaultSquareButtonDefaultBackground, LabelStyle: $C.@DefaultButtonLabelStyle),
     Hovered: (Background: $C.@DefaultSquareButtonHoveredBackground, LabelStyle: $C.@DefaultButtonLabelStyle),
     Pressed: (Background: $C.@DefaultSquareButtonPressedBackground, LabelStyle: $C.@DefaultButtonLabelStyle),
     Disabled: (Background: $C.@DefaultSquareButtonDisabledBackground, LabelStyle: $C.@DefaultButtonDisabledLabelStyle),
     Sounds: $C.@ButtonSounds,
 );
+@NavButtonSelected = TextButtonStyle(
+    Default: (Background: $C.@DefaultSquareButtonHoveredBackground, LabelStyle: $C.@DefaultButtonLabelStyle),
+);
+
 $C.@PageOverlay {
     $C.@Container {
         Anchor: (Width: 925, Height: 631);
@@ -66,30 +70,33 @@ $C.@PageOverlay {
                         Anchor: (Width: 200, Height: 50);
                         Text: "Combat";
                         Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
-                        Style: @CustomButtonStyle;
+                        Style: @NavButton;
                     }
                     $C.@TextButton #MiningButton {
                         Anchor: (Width: 200, Height: 50);
                         Text: "Mining";
                         Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
-                        Style: @CustomButtonStyle;
+                        Style: @NavButton;
                     }
                     $C.@TextButton #DefenseButton {
                         Anchor: (Width: 200, Height: 50);
                         Text: "Defense";
                         Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
-                        Style: @CustomButtonStyle;
+                        Style: @NavButton;
                     }
                     $C.@TextButton #EnduranceButton {
                         Anchor: (Width: 200, Height: 50);
                         Text: "Endurance";
                         Padding: (Left: 8, Right: 8, Top: 4, Bottom: 4);
-                        Style: @CustomButtonStyle;
+                        Style: @NavButton;
                     }
                 }
                 Group #LINEBREAKTWO {
                     Background: #000000(0.9);
                     Anchor: (Width: 5, Height: 548);
+                }
+                Group #SkillTreeContainer {
+                    Anchor: (Width: 695, Height: 548);
                 }
             }
         }
