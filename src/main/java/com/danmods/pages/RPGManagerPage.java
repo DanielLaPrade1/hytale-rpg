@@ -17,17 +17,18 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
-public class RPGManagerPage extends InteractiveCustomUIPage<RPGManagerPage.RPGManagerData> {
+public class RPGManagerPage extends InteractiveCustomUIPage<RPGManagerPage.RPGManagerData>{
+    private String selectedNav;
 
     public static class RPGManagerData {
-        public String action;
+        public String nav;
 
         public static final BuilderCodec<RPGManagerData> CODEC =
                 BuilderCodec.builder(RPGManagerData.class, RPGManagerData::new)
                         .append(
-                                new KeyedCodec<>("Action", Codec.STRING),
-                                (data, action) -> data.action = action,
-                                (data) -> data.action
+                                new KeyedCodec<>("Nav", Codec.STRING),
+                                (data, nav) -> data.nav = nav,
+                                (data) -> data.nav
                         ).add()
                         .build();
     }
@@ -35,6 +36,7 @@ public class RPGManagerPage extends InteractiveCustomUIPage<RPGManagerPage.RPGMa
     public RPGManagerPage(@NonNullDecl PlayerRef playerRef) {
         super(playerRef, CustomPageLifetime.CanDismissOrCloseThroughInteraction,
                 RPGManagerData.CODEC);
+        this.selectedNav = "#CombatNavButton";
     }
 
     @Override
@@ -60,24 +62,26 @@ public class RPGManagerPage extends InteractiveCustomUIPage<RPGManagerPage.RPGMa
         // Bind Action Buttons
         uiEventBuilder.addEventBinding(
                 CustomUIEventBindingType.Activating,
-                "#CombatButton",
-                new EventData().append("Action", "Combat")
+                "#CombatNavButton",
+                new EventData().append("Nav", "#CombatNavButton")
         );
         uiEventBuilder.addEventBinding(
                 CustomUIEventBindingType.Activating,
-                "#MiningButton",
-                new EventData().append("Action", "Mining")
+                "#MiningNavButton",
+                new EventData().append("Nav", "#MiningNavButton")
         );
         uiEventBuilder.addEventBinding(
                 CustomUIEventBindingType.Activating,
-                "#DefenseButton",
-                new EventData().append("Action", "Defense")
+                "#DefenseNavButton",
+                new EventData().append("Nav", "#DefenseNavButton")
         );
         uiEventBuilder.addEventBinding(
                 CustomUIEventBindingType.Activating,
-                "#EnduranceButton",
-                new EventData().append("Action", "Endurance")
+                "#EnduranceNavButton",
+                new EventData().append("Nav", "#EnduranceNavButton")
         );
+
+        setNav(ref, store, selectedNav);
     }
 
     @Override
@@ -88,38 +92,25 @@ public class RPGManagerPage extends InteractiveCustomUIPage<RPGManagerPage.RPGMa
     ) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        changeSkillTree(ref, store, data.action);
+        setNav(ref, store, data.nav);
     }
 
-    private void changeSkillTree(Ref<EntityStore> ref, Store<EntityStore> store, String page) {
+    private void setNav(Ref<EntityStore> ref, Store<EntityStore> store, String nav) {
         UICommandBuilder uicommandBuilder = new UICommandBuilder();
         UIEventBuilder uieventBuilder = new UIEventBuilder();
 
         uicommandBuilder.clear("#SkillTreeContainer");
 
-        String buttonId = "";
-
-        switch (page) {
-            case "Combat":
-                buttonId = "#CombatButton";
-                break;
-            case "Mining":
-                buttonId = "#MiningButton";
-                break;
-            case "Defense":
-                buttonId = "#DefenseButton";
-                break;
-            case "Endurance":
-                buttonId = "#EnduranceButton";
-                break;
-            default:
-                break;
+        // Set Nav Button Color
+        if (!nav.equals(selectedNav)) {
+            uicommandBuilder.set("%s.Background".formatted(selectedNav), "#090e14");
+            selectedNav = nav;
         }
-        //uicommandBuilder.set("%s.Style.Background".formatted(buttonId), "ff0000");
+        uicommandBuilder.set("%s.Background".formatted(nav), "#004aad");
 
         uicommandBuilder.append("#SkillTreeContainer", "Pages/SkillTree.ui");
 
-        uicommandBuilder.set("#SkillLabel.Text", page);
+        uicommandBuilder.set("#SkillLabel.Text", nav);
 
         sendUpdate(uicommandBuilder, uieventBuilder, false);
     }
