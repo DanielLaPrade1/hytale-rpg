@@ -1,0 +1,69 @@
+$C = "../Common.ui";
+Group {
+  LayoutMode: Top;
+  Background: (Color: #333333);
+  Anchor: (Width: 200, Height: 200);
+  Padding: (Top: 10);
+  Group #UpperGroup {
+    LayoutMode: Left;
+    Background: (Color: #333333);
+    Anchor: (Width: 170, Height: 40);
+    Group #TitleGroup {
+      LayoutMode: Top;
+      Background: (Color: #333333);
+      Anchor: (Width: 170, Height: 40);
+      Label #CardTitle {
+        Text: "Card Title";
+        Style: (VerticalAlignment: Center, TextColor: #ffffff, FontSize: 10, RenderBold: true);
+      }
+      Label #TitleUnderline {
+        Text: "_____________________________";
+        Style: (VerticalAlignment: Center, TextColor: #ffffff, FontSize: 10);
+      }
+    }
+  }
+  Group #XPBarContainer {
+    Background: (Color: #333333);
+    Anchor: (Width: 170, Height: 20);
+    LayoutMode: CenterMiddle;
+    Group #XPBar {
+      Anchor: (Width: 170, Height: 10);
+      LayoutMode: Top;
+      Background: "XPBackground.png";
+      ProgressBar #XPBarFill {
+        Anchor: (Width: 170, Height: 10);
+        Value: 0.5;
+        BarTexturePath: "XPFill.png";
+      }
+    }
+  }
+  Group #BottomGroup {
+    LayoutMode: Top;
+    Background: (Color: #333333);
+    Label #CardDescription1 {
+      Anchor: (Width: 200, Height: 20);
+      Padding: (Left: 15);
+      Text: "Increase Mining Speed";
+      Style: (TextColor: #ffffff, FontSize: 11);
+    }
+    Label #CardDescription2 {
+      Anchor: (Width: 200, Height: 20);
+      Padding: (Left: 15);
+      Text: "by 2%";
+      Style: (TextColor: #ffffff, FontSize: 13);
+    }
+    Button #BuyButton {
+      Background: (Color: #00bf63);
+      Anchor: (Width: 120, Height: 40, Left: 15, Top: 20);
+      LayoutMode: Top;
+      Label #BuyButtonLabel {
+        Text: "Buy";
+        Style: (VerticalAlignment: Center, RenderBold: true, FontSize: 15);
+      }
+      Label #BuyButtonDescription {
+        Text: "(4 Skill Points)";
+        Style: (VerticalAlignment: Center, FontSize: 8);
+      }
+    }
+  }
+}

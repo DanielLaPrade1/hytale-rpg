@@ -108,9 +108,9 @@ public class RPGManagerPage extends InteractiveCustomUIPage<RPGManagerPage.RPGMa
         }
         uicommandBuilder.set("%s.Background".formatted(nav), "#004aad");
 
-        uicommandBuilder.append("#SkillTreeContainer", "Pages/SkillTree.ui");
-
-        uicommandBuilder.set("#SkillLabel.Text", nav);
+        // Set Skill Node
+        uicommandBuilder.append("#SkillTreeContainer", "Pages/SkillNode.ui");
+        uicommandBuilder.set("#CardTitle.Text", nav);
 
         sendUpdate(uicommandBuilder, uieventBuilder, false);
     }
