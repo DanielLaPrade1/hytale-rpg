@@ -11,7 +11,7 @@ Group {
     Group #TitleGroup {
       LayoutMode: Top;
       Background: (Color: #333333);
-      Anchor: (Width: 170, Height: 40);
+      Anchor: (Width: 170, Height: 30);
       Label #CardTitle {
         Text: "Card Title";
         Style: (VerticalAlignment: Center, TextColor: #ffffff, FontSize: 10, RenderBold: true);
@@ -24,7 +24,7 @@ Group {
   }
   Group #XPBarContainer {
     Background: (Color: #333333);
-    Anchor: (Width: 170, Height: 20);
+    Anchor: (Width: 170, Height: 15);
     LayoutMode: CenterMiddle;
     Group #XPBar {
       Anchor: (Width: 170, Height: 10);
@@ -33,7 +33,7 @@ Group {
       ProgressBar #XPBarFill {
         Anchor: (Width: 170, Height: 10);
         Value: 0.5;
-        BarTexturePath: "XPFill.png";
+        BarTexturePath: "SkillFill.png";
       }
     }
   }
@@ -60,7 +60,7 @@ Group {
         Text: "Buy";
         Style: (VerticalAlignment: Center, RenderBold: true, FontSize: 15);
       }
-      Label #BuyButtonDescription {
+      Label #BuyButtonPrice {
         Text: "(4 Skill Points)";
         Style: (VerticalAlignment: Center, FontSize: 8);
       }

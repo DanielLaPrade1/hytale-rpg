@@ -1,6 +1,4 @@
-package com.danmods.tree;
-
-import java.util.ArrayList;
+package com.danmods.skill;
 
 public class SkillTreeNode extends TreeNode<SkillNodeData> {
     public SkillTreeNode(SkillNodeData data) {

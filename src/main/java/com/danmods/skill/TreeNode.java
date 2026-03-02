@@ -1,4 +1,4 @@
-package com.danmods.tree;
+package com.danmods.skill;
 
 import java.util.ArrayList;
 import java.util.List;
